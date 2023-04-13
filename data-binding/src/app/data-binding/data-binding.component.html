@@ -1,0 +1,14 @@
+<section class="property-binding">
+    <article>
+        <h3>Interpolação</h3>
+        <p>URL: {{ url }}</p>
+        <p>1 + 1 = {{ 1 + getValor() }}</p>
+    </article>
+    <article>
+        <h3>Property Binding</h3>
+        <img src="{{ urlImagem }}">
+        <img [src]="urlImagem">
+        <img [attr.src]="urlImagem">
+        <img bind-src="urlImagem">
+    </article>
+</section>
