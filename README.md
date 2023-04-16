@@ -26,15 +26,17 @@ ng g c cursos
 New Service  
 ng g s cursos/cursos  
   
-Bootstrap  
-npm install ng2-bootstrap bootstrap --save  
-
-Build
-ng build
-ng build --prod (minified)
-
-Install HTTP Server
-npm install http-server -g
-
-Run HTTP Server
-http-server
+Bootstrap (Aula 118)  
+npm install bootstrap --save  
+npm install ngx-bootstrap --save (replaces jQuery UI)  
+  
+Build  
+ng build  
+ng build --prod (minified)  
+  
+Install HTTP Server  
+npm install http-server -g  
+  
+Run HTTP Server  
+http-server  
+  
