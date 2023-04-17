@@ -40,3 +40,7 @@ npm install http-server -g
 Run HTTP Server  
 http-server  
   
+Na aula 40 vimos que:  
+diferentes módulos que instanciam o mesmo serviço compartilham a instância (singleton);  
+diferentes componentes que instanciam o mesmo serviço possuem suas próprias instâncias.  
+  
