@@ -1,0 +1,14 @@
+<p>Descrição: {{ tarefa.desc }}</p>
+
+<!--
+<p>
+    Responsável: {{
+        tarefa.responsavel != null
+        ? tarefa.responsavel.nome 
+        : ''
+    }}
+</p>
+-->
+
+<!-- Operador Elvis -->
+<p>Responsável: {{ tarefa.responsavel?.usuario?.nome }}</p>
