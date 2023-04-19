@@ -15,4 +15,12 @@ export class ExemplosPipesComponent {
     dataLancamento: new Date(2016, 5, 23),
     url: 'http://a.co/glgjpRP'
   };
+
+  livros: string[] = ['Java', 'Angular 2'];
+
+  filtro: string = '';
+
+  addCurso(valor: string) {
+    this.livros.push(valor);
+  }
 }
