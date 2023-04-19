@@ -44,3 +44,9 @@ Na aula 40 vimos que:
 diferentes módulos que instanciam o mesmo serviço compartilham a instância (singleton);  
 diferentes componentes que instanciam o mesmo serviço possuem suas próprias instâncias.  
   
+Rotas  
+npm install materialize-css --save  
+npm install angular2-materialize --save  
+npm install jquery@^2.2.4 --save  
+npm install hammerjs --save  
+  
