@@ -15,6 +15,8 @@ export class AlunosGuard implements CanActivateChild {
             return false;
         }
         */
+
+        console.log('AlunosGuard: Guarda de rota filha');
         
         return true;
     }
