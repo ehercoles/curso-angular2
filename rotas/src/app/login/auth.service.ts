@@ -21,4 +21,8 @@ export class AuthService {
       this.router.navigate(['/']);
     }
   }
+
+  usuarioEstaAutenticado() {
+    return this.usuarioAutenticado;
+  }
 }
