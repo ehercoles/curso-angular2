@@ -44,7 +44,7 @@ export class AlunoFormComponent implements OnInit, OnDestroy {
 
   podeMudarRota() {
     if (this.formMudou) {
-      confirm('Tem certeza que deseja sair dessa página?');
+      return confirm('Tem certeza que deseja sair dessa página?');
     }
 
     return true;
