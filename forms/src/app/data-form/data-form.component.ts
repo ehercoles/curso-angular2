@@ -41,17 +41,34 @@ export class DataFormComponent {
   onSubmit() {
     console.log(this.formulario);
 
-    // URL from resttesttest.com
-    this.http.post(
-        'https://httpbin.org/post',
-        JSON.stringify(this.formulario.value))
-      .subscribe({
-        next: (dados) => {
-          console.log(dados);
-          //this.resetar();
-        },
-        error: (error: any) => alert('erro')
-      });
+    if (this.formulario.valid) {
+      // URL from resttesttest.com
+      this.http.post(
+          'https://httpbin.org/post',
+          JSON.stringify(this.formulario.value))
+        .subscribe({
+          next: (dados) => {
+            console.log(dados);
+            //this.resetar();
+          },
+          error: (error: any) => alert('erro')
+        });
+    } else {
+      console.log('formulario inválido');
+      this.verificaValidacoesForm(this.formulario);
+    }
+  }
+
+  verificaValidacoesForm(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(campo => {
+      console.log(campo);
+      const controle = formGroup.get(campo);
+      controle?.markAsDirty();
+
+      if (controle instanceof FormGroup) {
+        this.verificaValidacoesForm(controle);
+      }
+    });
   }
 
   resetar() {
@@ -61,7 +78,7 @@ export class DataFormComponent {
   verificaValidTouched(campo: string) {
     let campoControl = this.formulario.get(campo);
 
-    return !campoControl?.valid && campoControl?.touched;
+    return !campoControl?.valid && (campoControl?.touched || campoControl?.dirty);
   }
 
   verificaEmailInvalido() {
