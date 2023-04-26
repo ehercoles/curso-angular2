@@ -36,7 +36,8 @@
             <div class="col-md-3" [ngClass]="aplicaCssErro(cep)">
                 <label for="cep" class="control-label">CEP</label>
                 <input type="text" class="form-control" id="cep"
-                    name="cep" ngModel required #cep="ngModel">
+                    name="cep" ngModel required #cep="ngModel"
+                    (blur)="consultaCep($event.target, f)">
                 <app-campo-control-erro
                     [mostraErro]="verificaValidTouched(cep)"
                     msgErro="Campo obrigatório">
@@ -57,6 +58,21 @@
                 <label for="complemento" class="control-label">Complemento</label>
                 <input type="text" class="form-control" id="complemento"
                     name="complemento" ngModel #complemento="ngModel">
+            </div>
+        </div>
+
+        <div class="form-group" [ngClass]="aplicaCssErro(rua)">
+            <div class="col-sm-12">
+                <label for="rua" class="control-label">Rua</label>
+            </div>
+
+            <div class="col-sm-12">
+                <input type="text" class="form-control" name="rua" 
+                id="rua" ngModel required #rua="ngModel">
+                <app-campo-control-erro
+                    [mostraErro]="verificaValidTouched(rua)"
+                    msgErro="Campo obrigatório">
+                </app-campo-control-erro>
             </div>
         </div>
 
