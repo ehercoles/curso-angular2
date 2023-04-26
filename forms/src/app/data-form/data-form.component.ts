@@ -35,6 +35,16 @@ export class DataFormComponent {
     this.http.post(
         'https://httpbin.org/post',
         JSON.stringify(this.formulario.value))
-      .subscribe(dados => console.log(dados));
+      .subscribe({
+        next: (dados) => {
+          console.log(dados);
+          this.resetar();
+        },
+        error: (error: any) => alert('erro')
+      });
+  }
+
+  resetar() {
+    this.formulario.reset;
   }
 }

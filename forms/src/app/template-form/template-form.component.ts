@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-template-form',
@@ -15,13 +16,16 @@ export class TemplateFormComponent {
 
   constructor(private http: HttpClient) { }
 
-  onSubmit(form: any) {
-    console.log(form);
+  onSubmit(formulario: any) {
+    console.log(formulario);
     //console.log(this.usuario);
 
     // URL from resttesttest.com
-    this.http.post('https://httpbin.org/post', JSON.stringify(form.value))
-      .subscribe(dados => console.log(dados));
+    this.http.post('https://httpbin.org/post', JSON.stringify(formulario.value))
+      .subscribe(dados => {
+        console.log(dados);
+        formulario.form.reset();
+      });
   }
 
   verificaValidTouched(campo: any) {
