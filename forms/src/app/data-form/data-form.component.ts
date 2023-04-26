@@ -20,8 +20,8 @@ export class DataFormComponent {
     */
 
     this.formulario = this.formBuilder.group({
-      nome: [null],
-      email: [null]
+      nome: [],
+      email: []
     });
   }
 }
