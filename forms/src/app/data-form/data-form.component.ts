@@ -78,4 +78,31 @@ export class DataFormComponent {
       'has-feedback': this.verificaValidTouched(campo)
     };
   }
+
+  consultaCep() {
+    let cep = this.formulario.get('endereco.cep')?.value;
+
+    cep = cep.replace(/\D/g, '');
+
+    if (cep != '') {
+      var validaCep = /^[0-9]{8}$/;
+      
+      if (validaCep.test(cep)) {
+        this.http.get(`//viacep.com.br/ws/${cep}/json`)
+          .subscribe(dados => this.populaDadosForm(dados, this.formulario));
+      }
+    }
+  }
+
+  populaDadosForm(dados :any, formulario: any) {
+    this.formulario.patchValue({
+      endereco: {
+        rua: dados.logradouro,
+        complemento: dados.complemento,
+        bairro: dados.bairro,
+        cidade: dados.localidade,
+        estado: dados.uf
+      }
+    });
+  }
 }
