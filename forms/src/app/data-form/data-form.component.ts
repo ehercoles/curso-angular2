@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 
@@ -9,7 +10,9 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 export class DataFormComponent {
   formulario!: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(
+    private formBuilder: FormBuilder,
+    private http: HttpClient) { }
 
   ngOnInit() {
     /*
@@ -23,5 +26,15 @@ export class DataFormComponent {
       nome: [],
       email: []
     });
+  }
+
+  onSubmit() {
+    console.log(this.formulario);
+
+    // URL from resttesttest.com
+    this.http.post(
+        'https://httpbin.org/post',
+        JSON.stringify(this.formulario.value))
+      .subscribe(dados => console.log(dados));
   }
 }
