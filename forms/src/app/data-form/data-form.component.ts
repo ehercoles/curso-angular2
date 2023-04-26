@@ -47,4 +47,25 @@ export class DataFormComponent {
   resetar() {
     this.formulario.reset;
   }
+
+  verificaValidTouched(campo: string) {
+    let campoControl = this.formulario.get(campo);
+
+    return !campoControl?.valid && campoControl?.touched;
+  }
+
+  verificaEmailInvalido() {
+    let campoEmail = this.formulario.get('email');
+
+    if (campoEmail?.errors) {
+      return campoEmail.errors['email'] && campoEmail.touched;
+    }
+  }
+
+  aplicaCssErro(campo: string) {
+    return {
+      'has-error': this.verificaValidTouched(campo),
+      'has-feedback': this.verificaValidTouched(campo)
+    };
+  }
 }
