@@ -19,7 +19,7 @@
             <label for="email" class="control-label">E-mail</label>
         </div>
         <div class="col-sm-12">
-            <input type="text" class="form-control" name="email"
+            <input type="email" class="form-control" name="email"
                 id="email" placeholder="usuario@email.com" [(ngModel)]="usuario.email"
                 required email #email="ngModel">
             <!-- Angular v2 não tem a diretiva email:
@@ -77,12 +77,12 @@
         </div>
 
         <div class="form-group">
-            <div class="col-md-5" [ngClass]="aplicaCssErro(complemento)">
+            <div class="col-md-5" [ngClass]="aplicaCssErro(bairro)">
                 <label for="bairro" class="control-label">Bairro</label>
                 <input type="text" class="form-control" id="bairro"
                     name="bairro" ngModel required #bairro="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(complemento)"
+                    [mostraErro]="verificaValidTouched(bairro)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
