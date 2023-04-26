@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-data-form',
@@ -23,8 +23,8 @@ export class DataFormComponent {
     */
 
     this.formulario = this.formBuilder.group({
-      nome: [],
-      email: []
+      nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
+      email: [null, [Validators.required, Validators.email]]
     });
   }
 
@@ -38,7 +38,7 @@ export class DataFormComponent {
       .subscribe({
         next: (dados) => {
           console.log(dados);
-          this.resetar();
+          //this.resetar();
         },
         error: (error: any) => alert('erro')
       });
