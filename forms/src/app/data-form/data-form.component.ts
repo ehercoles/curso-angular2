@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { EstadoBr } from './../shared/models/estado-br.model';
+import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 
 @Component({
   selector: 'app-data-form',
@@ -16,7 +17,8 @@ export class DataFormComponent {
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
-    private DropdownService: DropdownService) { }
+    private DropdownService: DropdownService,
+    private cepService: ConsultaCepService) { }
 
   ngOnInit() {
     /*
@@ -109,19 +111,13 @@ export class DataFormComponent {
   consultaCep() {
     let cep = this.formulario.get('endereco.cep')?.value;
 
-    cep = cep.replace(/\D/g, '');
-
-    if (cep != '') {
-      var validaCep = /^[0-9]{8}$/;
-      
-      if (validaCep.test(cep)) {
-        this.http.get(`//viacep.com.br/ws/${cep}/json`)
-          .subscribe(dados => this.populaDadosForm(dados, this.formulario));
-      }
+    if (cep != null && cep !== '') {
+      this.cepService.consultaCep(cep)
+        .subscribe(dados => this.populaDadosForm(dados));
     }
   }
 
-  populaDadosForm(dados :any, formulario: any) {
+  populaDadosForm(dados :any) {
     this.formulario.patchValue({
       endereco: {
         rua: dados.logradouro,
