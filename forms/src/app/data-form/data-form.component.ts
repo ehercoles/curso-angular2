@@ -137,7 +137,8 @@ export class DataFormComponent implements OnInit {
     this.formulario.get('cargo')?.setValue(cargo);
   }
 
-  // Compara as propriedades do objeto além da referência em memória
+  /* Compara as propriedades do objeto além da referência em memória
+  para o Angular conseguir setar corretamente no método setarCargo */
   compararCargos(obj1: any, obj2: any) {
     return obj1 && obj2 ?
       (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) :
