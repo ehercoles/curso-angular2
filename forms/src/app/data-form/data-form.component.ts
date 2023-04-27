@@ -13,6 +13,7 @@ import { DropdownService } from './../shared/services/dropdown.service';
 export class DataFormComponent implements OnInit {
   formulario!: FormGroup;
   estados!: EstadoBr[];
+  cargos!: any[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -25,6 +26,8 @@ export class DataFormComponent implements OnInit {
     this.dropdownService.getEstadosBr()
       .subscribe(dados => this.estados = dados);
     
+    this.cargos = this.dropdownService.getCargos();
+
     /*
     this.formulario = new FormGroup({
       nome: new FormControl(null),
@@ -44,7 +47,9 @@ export class DataFormComponent implements OnInit {
         bairro: [null, [Validators.required]],
         cidade: [null, [Validators.required]],
         estado: [null, [Validators.required]]
-      })
+      }),
+      
+      cargo: []
     });
   }
 
@@ -125,5 +130,17 @@ export class DataFormComponent implements OnInit {
         estado: dados.uf
       }
     });
+  }
+
+  setarCargo() {
+    const cargo = { nome: 'Dev', nivel: 'Pleno', desc: 'Dev Pl'};
+    this.formulario.get('cargo')?.setValue(cargo);
+  }
+
+  // Compara as propriedades do objeto além da referência em memória
+  compararCargos(obj1: any, obj2: any) {
+    return obj1 && obj2 ?
+      (obj1.nome === obj2.nome && obj1.nivel === obj2.nivel) :
+      obj1 && obj2
   }
 }
