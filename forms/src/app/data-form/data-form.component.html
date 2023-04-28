@@ -168,6 +168,10 @@
                         <input type="checkbox" [formControlName]="i" />{{ item }}
                     </label>
                 </div>
+                <app-campo-control-erro
+                    [mostraErro]="!formulario.get('frameworks')?.valid"
+                    msgErro="Selecione ao menos uma opção">
+                </app-campo-control-erro>
             </div>
         </div>
     </div>

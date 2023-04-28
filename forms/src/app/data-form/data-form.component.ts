@@ -4,6 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from './../shared/services/dropdown.service';
+import { FormValidation } from './form-validation';
 
 @Component({
   selector: 'app-data-form',
@@ -66,7 +67,7 @@ export class DataFormComponent implements OnInit {
   buildFrameworks() {
     const values = this.frameworks.map(v => new FormControl(false));
 
-    return this.formBuilder.array(values);
+    return this.formBuilder.array(values, FormValidation.validateMinCheckedCheckboxes(1));
   }
 
   onSubmit() {
