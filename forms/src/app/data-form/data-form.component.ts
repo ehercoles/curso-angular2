@@ -47,7 +47,7 @@ export class DataFormComponent implements OnInit {
       email: [null, [Validators.required, Validators.email]],
 
       endereco: this.formBuilder.group({
-        cep: [null, [Validators.required]],
+        cep: [null, [Validators.required, Validators.pattern(/^[0-9]{5}-[0-9]{3}$/)]],
         numero: [null, [Validators.required]],
         complemento: [],
         rua: [null, [Validators.required]],
@@ -117,25 +117,16 @@ export class DataFormComponent implements OnInit {
     this.formulario.reset;
   }
 
-  verificaValidTouched(campo: string) {
-    let campoControl = this.formulario.get(campo);
+  validateControl(controlId: string) {
+    let control = this.formulario.get(controlId);
 
-    return !campoControl?.valid
-      && (campoControl?.touched || campoControl?.dirty);
-  }
-
-  verificaEmailInvalido() {
-    let campoEmail = this.formulario.get('email');
-
-    if (campoEmail?.errors) {
-      return campoEmail.errors['email'] && campoEmail.touched;
-    }
+    return FormValidation.validateControl(control);
   }
 
   aplicaCssErro(campo: string) {
     return {
-      'has-error': this.verificaValidTouched(campo),
-      'has-feedback': this.verificaValidTouched(campo)
+      'has-error': this.validateControl(campo),
+      'has-feedback': this.validateControl(campo)
     };
   }
 

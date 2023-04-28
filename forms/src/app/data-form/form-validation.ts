@@ -1,4 +1,4 @@
-import { AbstractControl, FormArray, ValidatorFn } from "@angular/forms";
+import { AbstractControl, FormArray, FormControl, FormGroup, ValidatorFn } from "@angular/forms";
 
 export class FormValidation {
     static validateMinCheckedCheckboxes(min: number = 1) {
@@ -40,5 +40,10 @@ export class FormValidation {
         };
 
         return validator;
+    }
+
+    static validateControl(control: any) {
+        return !control?.valid
+          && (control?.touched || control?.dirty);
     }
 }

@@ -8,7 +8,7 @@
                 id="nome" placeholder="Nome" [(ngModel)]="usuario.nome"
                 required #nome="ngModel">
             <app-campo-control-erro
-                [mostraErro]="verificaValidTouched(nome)"
+                [mostraErro]="validateControl(nome)"
                 msgErro="Campo obrigatório">
             </app-campo-control-erro>
         </div>
@@ -25,7 +25,7 @@
             <!-- Angular v2 não tem a diretiva email:
                 pattern="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?" -->
             <app-campo-control-erro
-                [mostraErro]="verificaValidTouched(email)"
+                [mostraErro]="validateControl(email)"
                 msgErro="E-mail inválido">
             </app-campo-control-erro>
         </div>
@@ -39,7 +39,7 @@
                     name="cep" ngModel required #cep="ngModel"
                     (blur)="consultaCep($event.target, f)">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(cep)"
+                    [mostraErro]="validateControl(cep)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -49,7 +49,7 @@
                 <input type="text" class="form-control" id="numero"
                     name="numero" ngModel required #numero="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(numero)"
+                    [mostraErro]="validateControl(numero)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -70,7 +70,7 @@
                 <input type="text" class="form-control" name="rua" 
                 id="rua" ngModel required #rua="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(rua)"
+                    [mostraErro]="validateControl(rua)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -82,7 +82,7 @@
                 <input type="text" class="form-control" id="bairro"
                     name="bairro" ngModel required #bairro="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(bairro)"
+                    [mostraErro]="validateControl(bairro)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -92,7 +92,7 @@
                 <input type="text" class="form-control" id="cidade"
                     name="cidade" ngModel required #cidade="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(cidade)"
+                    [mostraErro]="validateControl(cidade)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -102,7 +102,7 @@
                 <input type="text" class="form-control" id="estado"
                     name="estado" ngModel required #estado="ngModel">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched(estado)"
+                    [mostraErro]="validateControl(estado)"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>

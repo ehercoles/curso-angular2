@@ -7,7 +7,7 @@
             <input type="text" class="form-control" formControlName="nome"
                 id="nome" placeholder="Nome">
             <app-campo-control-erro
-                [mostraErro]="verificaValidTouched('nome')"
+                [mostraErro]="validateControl('nome')"
                 msgErro="Campo obrigatório">
             </app-campo-control-erro>
         </div>
@@ -21,11 +21,7 @@
             <input type="email" class="form-control" id="email"
                 formControlName="email" placeholder="usuario@email.com">
             <app-campo-control-erro
-                [mostraErro]="verificaValidTouched('email')"
-                msgErro="Campo obrigatório">
-            </app-campo-control-erro>
-            <app-campo-control-erro
-                [mostraErro]="verificaEmailInvalido()"
+                [mostraErro]="validateControl('email')"
                 msgErro="E-mail inválido">
             </app-campo-control-erro>
         </div>
@@ -38,8 +34,8 @@
                 <input type="text" class="form-control" id="cep"
                     formControlName="cep" (blur)="consultaCep()">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.cep')"
-                    msgErro="Campo obrigatório">
+                    [mostraErro]="validateControl('endereco.cep')"
+                    msgErro="CEP inválido">
                 </app-campo-control-erro>
             </div>
 
@@ -48,7 +44,7 @@
                 <input type="text" class="form-control" id="numero"
                     formControlName="numero">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.numero')"
+                    [mostraErro]="validateControl('endereco.numero')"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -69,7 +65,7 @@
                 <input type="text" class="form-control" id="rua"
                     formControlName="rua">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.rua')"
+                    [mostraErro]="validateControl('endereco.rua')"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -81,7 +77,7 @@
                 <input type="text" class="form-control" id="bairro"
                     formControlName="bairro">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.bairro')"
+                    [mostraErro]="validateControl('endereco.bairro')"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -91,7 +87,7 @@
                 <input type="text" class="form-control" id="cidade"
                     formControlName="cidade">
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.cidade')"
+                    [mostraErro]="validateControl('endereco.cidade')"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>
@@ -104,7 +100,7 @@
                     </option>
                 </select>
                 <app-campo-control-erro
-                    [mostraErro]="verificaValidTouched('endereco.estado')"
+                    [mostraErro]="validateControl('endereco.estado')"
                     msgErro="Campo obrigatório">
                 </app-campo-control-erro>
             </div>

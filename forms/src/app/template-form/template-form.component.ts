@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
+import { FormValidation } from '../data-form/form-validation';
 
 @Component({
   selector: 'app-template-form',
@@ -30,14 +31,14 @@ export class TemplateFormComponent {
       });
   }
 
-  verificaValidTouched(campo: any) {
-    return !campo.valid && campo.touched;
+  validateControl(control: any) {
+    return FormValidation.validateControl(control);
   }
 
   aplicaCssErro(campo: any) {
     return {
-      'has-error': this.verificaValidTouched(campo),
-      'has-feedback': this.verificaValidTouched(campo)
+      'has-error': this.validateControl(campo),
+      'has-feedback': this.validateControl(campo)
     };
   }
 
