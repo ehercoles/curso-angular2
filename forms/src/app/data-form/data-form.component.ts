@@ -16,6 +16,7 @@ export class DataFormComponent implements OnInit {
   cargos!: any[];
   tecnologias!: any[];
   newsletterOp!: any[];
+  frameworks!: string[];
 
   constructor(
     private formBuilder: FormBuilder,
@@ -31,6 +32,7 @@ export class DataFormComponent implements OnInit {
     this.cargos = this.dropdownService.getCargos();
     this.tecnologias = this.dropdownService.getTecnologias();
     this.newsletterOp = this.dropdownService.getNewsletter();
+    this.frameworks = ['Angular', 'React', 'Vue', 'Sencha'];
 
     /*
     this.formulario = new FormGroup({
@@ -56,18 +58,35 @@ export class DataFormComponent implements OnInit {
       cargo: [],
       tecnologias: [],
       newsletter: ['s'],
-      termos: [null, Validators.pattern('true')]
+      termos: [null, Validators.pattern('true')],
+      frameworks: this.buildFrameworks()
     });
+  }
+
+  buildFrameworks() {
+    const values = this.frameworks.map(v => new FormControl(false));
+
+    return this.formBuilder.array(values);
   }
 
   onSubmit() {
     console.log(this.formulario);
 
+    let valueSubmit = Object.assign({}, this.formulario.value);
+
+    valueSubmit = Object.assign(valueSubmit, {
+      frameworks: valueSubmit.frameworks
+        .map((v: boolean, i: number) => v ? this.frameworks[i] : null)
+        .filter((v: any) => v !== null)
+    });
+
+    console.log(valueSubmit);
+
     if (this.formulario.valid) {
       // URL from resttesttest.com
       this.http.post(
           'https://httpbin.org/post',
-          JSON.stringify(this.formulario.value))
+          JSON.stringify(valueSubmit))
         .subscribe({
           next: (dados) => {
             console.log(dados);
