@@ -1,3 +1,4 @@
+import { ValidaEmailService } from './services/valida-email.service';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
@@ -5,6 +6,7 @@ import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { FormValidation } from './form-validation';
+import { map } from 'rxjs/operators';
 
 @Component({
   selector: 'app-data-form',
@@ -23,9 +25,12 @@ export class DataFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private dropdownService: DropdownService,
-    private cepService: ConsultaCepService) { }
+    private cepService: ConsultaCepService,
+    private validaEmailService: ValidaEmailService) { }
 
   ngOnInit() {
+
+    //this.validaEmailService.validarEmail('email@email.com').subscribe();
 
     this.dropdownService.getEstadosBr()
       .subscribe(dados => this.estados = dados);
@@ -44,7 +49,11 @@ export class DataFormComponent implements OnInit {
 
     this.formulario = this.formBuilder.group({
       nome: [null, [Validators.required, Validators.minLength(3), Validators.maxLength(20)]],
-      email: [null, [Validators.required, Validators.email]],
+      email: [
+        null,
+        [Validators.required, Validators.email],
+        [this.validarEmail.bind(this)] // async
+      ],
       email2: [null, [FormValidation.equalsTo('email')]],
 
       endereco: this.formBuilder.group({
@@ -167,5 +176,10 @@ export class DataFormComponent implements OnInit {
 
   setarTecnologias() {
     this.formulario.get('tecnologias')?.setValue(['java', 'javascript', 'php']);
+  }
+
+  validarEmail(formControl: FormControl) {
+    return this.validaEmailService.validarEmail(formControl.value)
+      .pipe(map(emailExiste => emailExiste ? { emailInvalido: true} : null));
   }
 }

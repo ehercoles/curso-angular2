@@ -20,9 +20,17 @@
         <div class="col-sm-12">
             <input type="email" class="form-control" id="email"
                 formControlName="email" placeholder="usuario@email.com">
-            <app-campo-control-erro
+                <app-campo-control-erro
                 [mostraErro]="validateControl('email')"
                 msgErro="E-mail inválido">
+            </app-campo-control-erro>
+            <app-campo-control-erro
+                [mostraErro]="formulario.get('email')?.status === 'PENDING'"
+                msgErro="Validando...">
+            </app-campo-control-erro>
+            <app-campo-control-erro
+                [mostraErro]="formulario.get('email')?.hasError('emailInvalido')"
+                msgErro="E-mail já cadastrado">
             </app-campo-control-erro>
         </div>
     </div>
