@@ -8,7 +8,7 @@ export class FormValidation {
               .map((control) => control.value)
               .reduce((prev, next) => (next ? prev + next : prev), 0);
             
-            return totalChecked >= min ? null : { required: true };
+            return totalChecked >= min ? null : { required : true };
           }
     
           throw new Error('formArray is not an instance of FormArray');
@@ -36,7 +36,7 @@ export class FormValidation {
                 .map(v => v.value)
                 .reduce((total, current) => current ? total + current : total, 0);
 
-            return totalChecked >= min ? null : { required: true };
+            return totalChecked >= min ? null : { required : true };
         };
 
         return validator;
@@ -50,7 +50,7 @@ export class FormValidation {
     static equalsTo(controlId: string) {
         const validator = (formControl: FormControl) => {
           if (controlId == null) {
-            throw new Error('É necessário informar um campo.');
+            throw new Error('É necessário informar um campo');
           }
     
           if (!formControl.root || !(<FormGroup>formControl.root).controls) {
@@ -60,16 +60,16 @@ export class FormValidation {
           const control = (<FormGroup>formControl.root).get(controlId);
     
           if (!control) {
-            throw new Error('É necessário informar um campo válido.');
+            throw new Error('É necessário informar um campo válido');
           }
     
           if (control.value !== formControl.value) {
-            return { equalsTo : controlId };
+            return { equalsTo : true };
           }
     
           return null;
         };
-        
+
         return validator;
     }
 }
