@@ -46,4 +46,30 @@ export class FormValidation {
         return !control?.valid
           && (control?.touched || control?.dirty);
     }
+
+    static equalsTo(controlId: string) {
+        const validator = (formControl: FormControl) => {
+          if (controlId == null) {
+            throw new Error('É necessário informar um campo.');
+          }
+    
+          if (!formControl.root || !(<FormGroup>formControl.root).controls) {
+            return null;
+          }
+    
+          const control = (<FormGroup>formControl.root).get(controlId);
+    
+          if (!control) {
+            throw new Error('É necessário informar um campo válido.');
+          }
+    
+          if (control.value !== formControl.value) {
+            return { equalsTo : controlId };
+          }
+    
+          return null;
+        };
+        
+        return validator;
+    }
 }
