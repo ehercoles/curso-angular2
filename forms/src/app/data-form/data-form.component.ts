@@ -9,6 +9,7 @@ import { FormValidation } from './form-validation';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { empty } from 'rxjs';
 import { BaseFormComponent } from '../shared/base-form/base-form.component';
+import { Cidade } from '../shared/models/cidade';
 
 @Component({
   selector: 'app-data-form',
@@ -18,6 +19,8 @@ import { BaseFormComponent } from '../shared/base-form/base-form.component';
 export class DataFormComponent extends BaseFormComponent implements OnInit {
   //formulario!: FormGroup;
   estados!: EstadoBr[];
+  //estados!: Observable<EstadoBr[]>;
+  cidades!: Cidade[];
   cargos!: any[];
   tecnologias!: any[];
   newsletterOp!: any[];
@@ -87,13 +90,24 @@ export class DataFormComponent extends BaseFormComponent implements OnInit {
     this.formulario.get('endereco.cep')?.statusChanges
       .pipe(
         distinctUntilChanged(),
-        tap(value => console.log('valor CEP: ', value)), // former 'do'
+        tap(value => console.log('valor CEP: ', value)), // 'tap' is the former 'do'
         switchMap(status => status === 'VALID' ? 
           this.cepService.consultarCep(this.formulario.get('endereco.cep')?.value)
           : empty()
         )
       )
       .subscribe(dados => dados ? this.setEndereco(dados) : {});
+
+      //this.dropdownService.getCidades(8).subscribe(console.log);
+      this.formulario.get('endereco.estado')?.valueChanges
+      .pipe(
+        tap(estado => console.log('Novo estado: ', estado)),
+        map(estado => this.estados.filter(e => e.sigla === estado)),
+        map(estados => estados && estados.length > 0 ? estados[0].id : 0),
+        switchMap((estadoId :number) => this.dropdownService.getCidades(estadoId)),
+        tap(console.log)
+      )
+      .subscribe(cidades => this.cidades = cidades);
   }
 
   buildFrameworks() {
