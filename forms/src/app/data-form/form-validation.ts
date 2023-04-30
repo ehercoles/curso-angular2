@@ -84,7 +84,10 @@ export class FormValidation {
         'required': `${controlDesc} é obrigatório`,
         'minlength': `${controlDesc} precisa ter no mínimo ${validatorValue.requiredLength} caracteres`,
         'maxlength': `${controlDesc} precisa ter no máximo ${validatorValue.requiredLength} caracteres`,
-        'equalsTo': `${controlDesc} divergente`
+        'equalsTo': `${controlDesc} divergente`,
+        'emailInvalido': 'E-mail já cadastrado',
+        'email': `${controlDesc} inválido`,
+        'pattern': `${controlDesc} inválido`
       }
 
       return config[validatorId];
