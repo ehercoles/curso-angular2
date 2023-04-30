@@ -6,7 +6,8 @@ import { EstadoBr } from './../shared/models/estado-br.model';
 import { ConsultaCepService } from '../shared/services/consulta-cep.service';
 import { DropdownService } from './../shared/services/dropdown.service';
 import { FormValidation } from './form-validation';
-import { map } from 'rxjs/operators';
+import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
+import { empty } from 'rxjs';
 
 @Component({
   selector: 'app-data-form',
@@ -79,6 +80,17 @@ export class DataFormComponent implements OnInit {
       termos: [null, Validators.pattern('true')],
       frameworks: this.buildFrameworks()
     });
+
+    this.formulario.get('endereco.cep')?.statusChanges
+      .pipe(
+        distinctUntilChanged(),
+        tap(value => console.log('valor CEP: ', value)), // former 'do'
+        switchMap(status => status === 'VALID' ? 
+          this.cepService.consultarCep(this.formulario.get('endereco.cep')?.value)
+          : empty()
+        )
+      )
+      .subscribe(dados => dados ? this.setEndereco(dados) : {});
   }
 
   buildFrameworks() {
@@ -147,16 +159,16 @@ export class DataFormComponent implements OnInit {
     };
   }
 
-  consultaCep() {
+  consultarCep() {
     let cep = this.formulario.get('endereco.cep')?.value;
 
     if (cep != null && cep !== '') {
-      this.cepService.consultaCep(cep)
-        .subscribe(dados => this.populaDadosForm(dados));
+      this.cepService.consultarCep(cep)
+        .subscribe(dados => this.setEndereco(dados));
     }
   }
 
-  populaDadosForm(dados :any) {
+  setEndereco(dados :any) {
     this.formulario.patchValue({
       endereco: {
         rua: dados.logradouro,

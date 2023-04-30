@@ -9,7 +9,7 @@ export class ConsultaCepService {
   
   constructor(private http: HttpClient) { }
 
-  consultaCep(cep: string) {
+  consultarCep(cep: string) {
     cep = cep.replace(/\D/g, '');
 
     if (cep != '') {

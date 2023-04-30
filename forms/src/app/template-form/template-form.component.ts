@@ -42,13 +42,13 @@ export class TemplateFormComponent {
     };
   }
 
-  consultaCep(campoCep: any, form: any) {
+  consultarCep(campoCep: any, form: any) {
     var cep = campoCep.value;
 
     cep = cep.replace(/\D/g, '');
 
     if (cep != null && cep !== '') {
-      this.cepService.consultaCep(cep)
+      this.cepService.consultarCep(cep)
         .subscribe(dados => this.populaDadosForm(dados, form));
     }
   }
