@@ -8,14 +8,15 @@ import { DropdownService } from './../shared/services/dropdown.service';
 import { FormValidation } from './form-validation';
 import { distinctUntilChanged, map, switchMap, tap } from 'rxjs/operators';
 import { empty } from 'rxjs';
+import { BaseFormComponent } from '../shared/base-form/base-form.component';
 
 @Component({
   selector: 'app-data-form',
   templateUrl: './data-form.component.html',
   styleUrls: ['./data-form.component.css']
 })
-export class DataFormComponent implements OnInit {
-  formulario!: FormGroup;
+export class DataFormComponent extends BaseFormComponent implements OnInit {
+  //formulario!: FormGroup;
   estados!: EstadoBr[];
   cargos!: any[];
   tecnologias!: any[];
@@ -27,7 +28,9 @@ export class DataFormComponent implements OnInit {
     private http: HttpClient,
     private dropdownService: DropdownService,
     private cepService: ConsultaCepService,
-    private validaEmailService: ValidaEmailService) { }
+    private validaEmailService: ValidaEmailService) {
+      super(); // BaseFormComponent constructor
+    }
 
   ngOnInit() {
 
@@ -99,7 +102,7 @@ export class DataFormComponent implements OnInit {
     return this.formBuilder.array(values, FormValidation.validateMinCheckedCheckboxes(1));
   }
 
-  onSubmit() {
+  override submit() {
     console.log(this.formulario);
 
     let valueSubmit = Object.assign({}, this.formulario.value);
@@ -109,54 +112,20 @@ export class DataFormComponent implements OnInit {
         .map((v: boolean, i: number) => v ? this.frameworks[i] : null)
         .filter((v: any) => v !== null)
     });
-
+ 
     console.log(valueSubmit);
 
-    if (this.formulario.valid) {
-      // URL from resttesttest.com
-      this.http.post(
-          'https://httpbin.org/post',
-          JSON.stringify(valueSubmit))
-        .subscribe({
-          next: (dados) => {
-            console.log(dados);
-            //this.resetar();
-          },
-          error: (error: any) => alert('erro')
-        });
-    } else {
-      console.log('formulario inválido');
-      this.verificaValidacoesForm(this.formulario);
-    }
-  }
-
-  verificaValidacoesForm(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(campo => {
-      console.log(campo);
-      const controle = formGroup.get(campo);
-      controle?.markAsDirty();
-
-      if (controle instanceof FormGroup) {
-        this.verificaValidacoesForm(controle);
-      }
+    // URL from resttesttest.com
+    this.http.post(
+      'https://httpbin.org/post',
+      JSON.stringify(valueSubmit))
+    .subscribe({
+      next: (dados) => {
+        console.log(dados);
+        //this.resetar();
+      },
+      error: (error: any) => alert('erro')
     });
-  }
-
-  resetar() {
-    this.formulario.reset;
-  }
-
-  validateControl(controlId: string) {
-    let control = this.formulario.get(controlId);
-
-    return FormValidation.validateControl(control);
-  }
-
-  aplicaCssErro(campo: string) {
-    return {
-      'has-error': this.validateControl(campo),
-      'has-feedback': this.validateControl(campo)
-    };
   }
 
   consultarCep() {
