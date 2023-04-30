@@ -6,10 +6,7 @@
         <div class="col-sm-12">
             <input type="text" class="form-control" formControlName="nome"
                 id="nome" placeholder="Nome">
-            <app-campo-control-erro
-                [mostraErro]="validateControl('nome')"
-                msgErro="Campo obrigatório">
-            </app-campo-control-erro>
+            <app-error-message [control]="$any(formulario.get('nome'))" label="Nome" />
         </div>
     </div>
 

@@ -72,4 +72,21 @@ export class FormValidation {
 
         return validator;
     }
+
+    static getErrorMessage(
+      controlDesc: string,
+      validatorId: string,
+      validatorValue?: any) {
+
+      let config: {[key: string]: string};
+
+      config = {
+        'required': `${controlDesc} é obrigatório`,
+        'minlength': `${controlDesc} precisa ter no mínimo ${validatorValue.requiredLength} caracteres`,
+        'maxlength': `${controlDesc} precisa ter no máximo ${validatorValue.requiredLength} caracteres`,
+        'equalsTo': `${controlDesc} divergente`
+      }
+
+      return config[validatorId];
+    }
 }
