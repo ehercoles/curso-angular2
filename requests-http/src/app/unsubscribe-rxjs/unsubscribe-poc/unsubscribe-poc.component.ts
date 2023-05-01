@@ -6,6 +6,7 @@ import { EnviarValorService } from '../enviar-valor.service';
   templateUrl: './unsubscribe-poc.component.html',
   styleUrls: ['./unsubscribe-poc.component.scss']
 })
+
 export class UnsubscribePocComponent implements OnInit {
 
   mostrarComponentes = true;
@@ -16,11 +17,10 @@ export class UnsubscribePocComponent implements OnInit {
   }
 
   emitirValor(valor: string) {
-
+    this.service.emitirValor(valor);
   }
 
   destruirComponentes() {
     this.mostrarComponentes = !this.mostrarComponentes;
   }
-
 }
