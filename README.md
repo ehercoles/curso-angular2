@@ -50,3 +50,8 @@ npm install angular2-materialize --save
 npm install jquery@^2.2.4 --save  
 npm install hammerjs --save  
   
+Simulador Servidor REST (JSON Server)  
+npm install -g json-server  
+Usage: json-server --watch db.json  
+Alternative: Mockoon: https://mockoon.com/  
+  
