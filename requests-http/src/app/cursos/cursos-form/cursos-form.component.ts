@@ -59,9 +59,6 @@ export class CursosFormComponent implements OnInit {
 
     const curso = this.route.snapshot.data['curso'];
 
-    console.log(curso.id);
-    console.log(curso.nome);
-
     this.form = this.fb.group({
       id: curso.id,
       nome: [curso.nome,
@@ -90,13 +87,16 @@ export class CursosFormComponent implements OnInit {
 
     if (this.form.valid) {
       console.log('submit');
-      this.service.create(this.form.value).subscribe(
+
+      //if (this.form.value.id) { // update (mensagem customizada)
+
+      this.service.save(this.form.value).subscribe(
         success => {
-          this.modal.showAlertSuccess("Curso criado com sucesso");
+          this.modal.showAlertSuccess("Curso salvo com sucesso");
           this.router.navigateByUrl("/cursos");
         },
-        error => this.modal.showAlertDanger("Erro ao criar curso"),
-        () => console.log('request completo')
+        error => this.modal.showAlertDanger("Erro ao salvar curso"),
+        () => console.log('save completo')
       );
     }
   }
