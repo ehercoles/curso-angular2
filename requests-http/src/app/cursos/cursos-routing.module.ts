@@ -10,7 +10,7 @@ const routes: Routes = [
     component: CursosFormComponent,
     resolve: { curso: CursoResolverGuard }
   },
-  { path: 'editar/:id',
+  { path: 'update/:id',
     component: CursosFormComponent,
     resolve: { curso: CursoResolverGuard }
   }

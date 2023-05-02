@@ -102,7 +102,6 @@ export class CursosFormComponent implements OnInit {
   }
 
   onCancel() {
-    this.submitted = false;
-    this.form.reset();
+    this.router.navigateByUrl("/cursos");
   }
 }
