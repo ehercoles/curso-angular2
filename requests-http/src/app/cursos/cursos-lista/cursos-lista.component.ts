@@ -40,6 +40,7 @@ export class CursosListaComponent implements OnInit {
         })
       );
     
+    /*
     this.service.list()
       .pipe(
         catchError(error => empty())
@@ -51,6 +52,7 @@ export class CursosListaComponent implements OnInit {
         error => console.error(error),
         () => console.log('Observable completo')
       );
+      */
   }
 
   handleError() {
