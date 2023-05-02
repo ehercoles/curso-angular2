@@ -31,7 +31,7 @@ export class PocTakeUntilComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.unsub$.next(Subject);
+    this.unsub$.next(true);
     this.unsub$.complete();
     console.log(`${this.nome} foi destruído`);
   }
