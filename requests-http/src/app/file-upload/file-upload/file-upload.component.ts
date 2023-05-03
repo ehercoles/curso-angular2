@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
-import { HttpEvent, HttpEventType } from '@angular/common/http';
+import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
 
 @Component({
   selector: 'app-file-upload',
@@ -42,17 +42,26 @@ export class FileUploadComponent {
       // No Angular '/api' não é rota, é chamada de back-end
       //this.service.upload(this.files, '/api/upload')
       this.service.upload(this.files, 'http://localhost:8000/upload')
+        .pipe(
+          uploadProgress(progress => {
+            console.log(this.progress);
+            this.progress = progress;
+          }),
+          filterResponse()
+        )
+        .subscribe(response => console.log('upload done'));
+        /*
         .subscribe((event: HttpEvent<Object>) => {
-          //HttpEventType
-          console.log(event);
+          //console.log(event);
 
           if (event.type === HttpEventType.Response) {
             console.log('upload done');
           } else if (event.type === HttpEventType.UploadProgress) {
             this.progress = Math.round((event.loaded * 100) / (event.total ?? 1));
-            console.log('Progresso', this.progress);
+            //console.log('Progresso', this.progress);
           }
         });
+        */
     }
   }
 }
