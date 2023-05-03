@@ -3,11 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   {
-    path: '', pathMatch: 'full', redirectTo: 'cursos'
+    path: '', pathMatch: 'full', redirectTo: 'upload'
   },
   {
     path: 'cursos',
     loadChildren: () => import('./cursos/cursos.module').then(m => m.CursosModule)
+  },
+  {
+    path: 'upload',
+    loadChildren: () => import('./file-upload/file-upload.module').then(m => m.FileUploadModule)
   },
   {
     path: 'rxjs-poc',
