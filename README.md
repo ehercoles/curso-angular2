@@ -55,3 +55,7 @@ npm install -g json-server
 Usage: json-server --watch db.json  
 Alternative: Mockoon: https://mockoon.com/  
   
+File Upload back-end (Aula 136)  
+https://github.com/expressjs/body-parser  
+npm i -save express body-parser connect-multiparty cors  
+  
