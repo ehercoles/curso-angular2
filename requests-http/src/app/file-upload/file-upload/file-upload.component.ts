@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FileUploadService } from '../file-upload.service';
 import { filterResponse, uploadProgress } from 'src/app/shared/rxjs-operators';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-file-upload',
@@ -41,7 +42,7 @@ export class FileUploadComponent {
       // Undo: Aula 138
       // No Angular '/api' não é rota, é chamada de back-end
       //this.service.upload(this.files, '/api/upload')
-      this.service.upload(this.files, 'http://localhost:8000/upload')
+      this.service.upload(this.files, environment.BASE_URL + 'upload')
         .pipe(
           uploadProgress(progress => {
             console.log(this.progress);
@@ -63,5 +64,19 @@ export class FileUploadComponent {
         });
         */
     }
+  }
+
+  onDownloadExcel() {
+    this.service.download(environment.BASE_URL + 'downloadExcel')
+      .subscribe((res: any) => {
+        this.service.handleFile(res, '1.xlsx');
+      });
+  }
+
+  onDownloadPdf() {
+    this.service.download(environment.BASE_URL + 'downloadPdf')
+      .subscribe((res: any) => {
+        this.service.handleFile(res, '1.pdf');
+      });
   }
 }
