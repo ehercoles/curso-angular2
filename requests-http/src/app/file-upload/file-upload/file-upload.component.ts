@@ -34,9 +34,10 @@ export class FileUploadComponent {
 
   onUpload() {
     if (this.files && this.files.size > 0) {
+      // Undo: Aula 138
       // No Angular '/api' não é rota, é chamada de back-end
-      this.service.upload(this.files, '/api/upload')
-      //this.service.upload(this.files, 'http://localhost:8000/upload')
+      //this.service.upload(this.files, '/api/upload')
+      this.service.upload(this.files, 'http://localhost:8000/upload')
         .subscribe(response => console.log('upload done'));
     }
   }

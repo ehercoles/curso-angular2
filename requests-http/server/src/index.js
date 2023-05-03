@@ -9,14 +9,14 @@ const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-/*
+///* Undo: Aula 138
 const corsOptions = {
     origin: '*',
     optionsSuccessStatus: 200
 };
 
 app.use(cors(corsOptions));
-*/
+//*/
 
 const multipartMiddleware = multipart({ uploadDir: './upload' });
 
