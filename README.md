@@ -68,3 +68,10 @@ firebase login
 firebase init  
 firebase deploy  
   
+Deploy no Firebase com Angular CLI (Aula 149)  
+[npm i -g firebase-tools]  
+[firebase login]  
+apagar arquivos 'firebase' e pasta 'dist'  
+ng add @angular/fire  
+ng deploy  
+  

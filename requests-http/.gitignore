@@ -44,3 +44,8 @@ Thumbs.db
 # node
 /server/node_modules
 /server/upload
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json

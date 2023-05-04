@@ -1,4 +1,13 @@
 {
+  "targets": {
+    "curso-angular2-dbce1": {
+      "hosting": {
+        "requests-http": [
+          "curso-angular2-dbce1"
+        ]
+      }
+    }
+  },
   "projects": {
     "default": "curso-angular2-dbce1"
   }
