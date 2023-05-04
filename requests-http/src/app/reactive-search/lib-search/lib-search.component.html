@@ -15,4 +15,21 @@
         </div>
       </div>
     </div>
+    <div class="search-list">
+      <h3>{{ total }} registros encontrados</h3>
+      <table class="table" id="myTable">
+        <thead>
+          <tr>
+            <th>Nome</th>
+            <th>Versão</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let result of results$ | async">
+            <td>{{ result.name }}</td>
+            <td>{{ result.version }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 </div>
