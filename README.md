@@ -55,10 +55,16 @@ npm install -g json-server
 Usage: json-server --watch db.json  
 Alternative: Mockoon: https://mockoon.com/  
   
-File Upload back-end (Aula 136)  
+File Upload back-end em Node (Aula 136)  
 https://github.com/expressjs/body-parser  
 npm i -save express body-parser connect-multiparty cors  
   
 Build Produção (Aula 147)  
 npm run build (já executa o comando 'ng build' configurado no package.json)  
+  
+Deploy Produção (Firebase Hosting)  
+npm i -g firebase-tools  
+firebase login  
+firebase init  
+firebase deploy  
   
